@@ -5,6 +5,8 @@ Simple gem for defining HTML forms with DSL. Even simpler than SimpleForm.
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/sugarfree900/rails-project-63/workflows/hexlet-check/badge.svg)](https://github.com/sugarfree900/rails-project-63/actions)
 
+[![Actions Status](https://github.com/sugarfree900/rails-project-63/workflows/CI/badge.svg)](https://github.com/sugarfree900/rails-project-63/actions)
+
 ## Installation
 
 Add this line to your application's Gemfile:
