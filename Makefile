@@ -3,5 +3,4 @@ install:
 lint:
 	rubocop
 test:
-	make rake
-
+	rake
