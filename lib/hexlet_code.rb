@@ -11,7 +11,6 @@ module HexletCode
   autoload(:Tag, './lib/tag.rb')
 
   def self.form_for(_, params = {})
-    action = params[:url] || '#'
-    "<form action=\"#{action}\" method=\"post\"></form>"
+    Tag.build('form', action: params[:url] || '#', method: 'post') {}
   end
 end
