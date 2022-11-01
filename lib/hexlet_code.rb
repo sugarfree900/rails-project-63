@@ -13,12 +13,17 @@ module HexletCode
     end
 
     def input(attr, params = {})
+      @form_value += label_tag(attr)
       @form_value += case params[:as]
                      when :text
                        textarea_tag(attr, params)
                      else
                        default_tag(attr, params)
                      end
+    end
+
+    def submit(value = 'Save')
+      @form_value += Tag.build('input', {type: 'submit', value: value})
     end
 
     def form_value
@@ -43,6 +48,10 @@ module HexletCode
         type: 'text',
         value: public_send(attr.to_s)
       }.merge(params))
+    end
+
+    def label_tag(attr)
+      Tag.build('label', {for: attr}) {}
     end
   end
 

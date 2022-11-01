@@ -22,9 +22,11 @@ class FormTest < Minitest::Test
       f.input :name
       # Проверяет есть ли значение внутри job
       f.input :job, as: :text
+      f.submit 'Wow'
     end
-    assert result == '<form action="#" method="post"><input name="name" type="text" value="rob"><textarea name="job" ' \
-                     'cols="20" rows="40">hexlet</textarea></form>'
+    assert result == '<form action="#" method="post"><label for="name"></label>' \
+                     '<input name="name" type="text" value="rob"><label for="job"></label><textarea name="job" ' \
+                     'cols="20" rows="40">hexlet</textarea><input type="submit" value="Wow"></form>'
   end
 
   # добавил в фикстуру value="hexlet" для атрибута job (тк значение у нас есть!)
@@ -32,16 +34,19 @@ class FormTest < Minitest::Test
     result = HexletCode.form_for @user, url: '#' do |f|
       f.input :name, class: 'user-input'
       f.input :job
+      f.submit
     end
-    assert result == '<form action="#" method="post"><input name="name" type="text" value="rob" class="user-input">' \
-                     '<input name="job" type="text" value="hexlet"></form>'
+    assert result == '<form action="#" method="post"><label for="name"></label>' \
+                     '<input name="name" type="text" value="rob" class="user-input">' \
+                     '<label for="job"></label><input name="job" type="text" value="hexlet">' \
+                     '<input type="submit" value="Save"></form>'
   end
 
   def test_with_inputs_with_default_values
     result = HexletCode.form_for @user do |f|
       f.input :job, as: :text
     end
-    assert result == '<form action="#" method="post"><textarea name="job" cols="20" rows="40">hexlet</textarea></form>'
+    assert result == '<form action="#" method="post"><label for="job"></label><textarea name="job" cols="20" rows="40">hexlet</textarea></form>'
   end
 
   # изменил порядок атрибутов на тот, который прописан в дефолтах, тк в ruby порядок гарантируется хешем
@@ -49,7 +54,7 @@ class FormTest < Minitest::Test
     result = HexletCode.form_for @user, url: '#' do |f|
       f.input :job, as: :text, rows: 50, cols: 50
     end
-    assert result == '<form action="#" method="post"><textarea name="job" cols="50" rows="50">hexlet</textarea></form>'
+    assert result == '<form action="#" method="post"><label for="job"></label><textarea name="job" cols="50" rows="50">hexlet</textarea></form>'
   end
 
   def test_error_for_undefined_field
