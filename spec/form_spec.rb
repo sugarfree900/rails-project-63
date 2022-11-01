@@ -24,8 +24,8 @@ class FormTest < Minitest::Test
       f.input :job, as: :text
       f.submit 'Wow'
     end
-    assert result == '<form action="#" method="post"><label for="name"></label>' \
-                     '<input name="name" type="text" value="rob"><label for="job"></label><textarea name="job" ' \
+    assert result == '<form action="#" method="post"><label for="name">Name</label>' \
+                     '<input name="name" type="text" value="rob"><label for="job">Job</label><textarea name="job" ' \
                      'cols="20" rows="40">hexlet</textarea><input type="submit" value="Wow"></form>'
   end
 
@@ -36,9 +36,9 @@ class FormTest < Minitest::Test
       f.input :job
       f.submit
     end
-    assert result == '<form action="#" method="post"><label for="name"></label>' \
+    assert result == '<form action="#" method="post"><label for="name">Name</label>' \
                      '<input name="name" type="text" value="rob" class="user-input">' \
-                     '<label for="job"></label><input name="job" type="text" value="hexlet">' \
+                     '<label for="job">Job</label><input name="job" type="text" value="hexlet">' \
                      '<input type="submit" value="Save"></form>'
   end
 
@@ -46,7 +46,7 @@ class FormTest < Minitest::Test
     result = HexletCode.form_for @user do |f|
       f.input :job, as: :text
     end
-    assert result == '<form action="#" method="post"><label for="job"></label><textarea name="job" cols="20" rows="40">hexlet</textarea></form>'
+    assert result == '<form action="#" method="post"><label for="job">Job</label><textarea name="job" cols="20" rows="40">hexlet</textarea></form>'
   end
 
   # изменил порядок атрибутов на тот, который прописан в дефолтах, тк в ruby порядок гарантируется хешем
@@ -54,7 +54,7 @@ class FormTest < Minitest::Test
     result = HexletCode.form_for @user, url: '#' do |f|
       f.input :job, as: :text, rows: 50, cols: 50
     end
-    assert result == '<form action="#" method="post"><label for="job"></label><textarea name="job" cols="50" rows="50">hexlet</textarea></form>'
+    assert result == '<form action="#" method="post"><label for="job">Job</label><textarea name="job" cols="50" rows="50">hexlet</textarea></form>'
   end
 
   def test_error_for_undefined_field

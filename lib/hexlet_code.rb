@@ -51,7 +51,7 @@ module HexletCode
     end
 
     def label_tag(attr)
-      Tag.build('label', {for: attr}) {}
+      Tag.build('label', {for: attr}) { attr.to_s.capitalize }
     end
   end
 
