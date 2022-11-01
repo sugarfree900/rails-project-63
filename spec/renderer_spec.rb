@@ -2,7 +2,7 @@
 
 require_relative '../lib/hexlet_code'
 
-class FormTest < Minitest::Test
+class RendererTest < Minitest::Test
   def setup
     @user = HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm'
     @setup ||= Dir['spec/fixtures/*'].map { |f| [File.basename(f, '.html'), File.read(f)] }.to_h
