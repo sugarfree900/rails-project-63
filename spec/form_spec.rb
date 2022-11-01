@@ -17,14 +17,14 @@ class FormTest < Minitest::Test
   end
 
   def test_with_inputs
-    result = HexletCode.form_for @user do |f|
+    result = HexletCode.form_for(@user, url: '/users', method: 'patch') do |f|
       # Проверяет есть ли значение внутри name
       f.input :name
       # Проверяет есть ли значение внутри job
       f.input :job, as: :text
       f.submit 'Wow'
     end
-    assert result == '<form action="#" method="post"><label for="name">Name</label>' \
+    assert result == '<form action="/users" method="patch"><label for="name">Name</label>' \
                      '<input name="name" type="text" value="rob"><label for="job">Job</label><textarea name="job" ' \
                      'cols="20" rows="40">hexlet</textarea><input type="submit" value="Wow"></form>'
   end

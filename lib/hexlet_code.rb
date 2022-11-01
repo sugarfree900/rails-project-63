@@ -58,7 +58,7 @@ module HexletCode
   autoload(:Tag, './lib/tag.rb')
 
   def self.form_for(user, params = {})
-    Tag.build('form', action: params[:url] || '#', method: 'post') do
+    Tag.build('form', action: params[:url] || '#', method: params[:method] || 'post') do
       yield user
       user.form_value
     end
