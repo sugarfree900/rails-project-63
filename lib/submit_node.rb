@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-
 module HexletCode
   class SubmitNode
     attr_accessor :tag, :attrs, :content
