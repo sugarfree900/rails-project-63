@@ -23,7 +23,7 @@ module HexletCode
     end
 
     def submit(value = 'Save')
-      @form_value += Tag.build('input', {type: 'submit', value: value})
+      @form_value += Tag.build('input', { type: 'submit', value: value })
     end
 
     def form_value
@@ -51,7 +51,7 @@ module HexletCode
     end
 
     def label_tag(attr)
-      Tag.build('label', {for: attr}) { attr.to_s.capitalize }
+      Tag.build('label', { for: attr }) { attr.to_s.capitalize }
     end
   end
 
