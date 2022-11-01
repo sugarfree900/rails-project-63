@@ -20,4 +20,4 @@ Style/Documentation:
     - 'spec/**/*'
     - 'test/**/*'
     - 'lib/hexlet_code.rb'
-    - 'lib/tag.rb'
+    - 'lib/*'
