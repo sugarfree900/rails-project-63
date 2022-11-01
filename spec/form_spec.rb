@@ -5,56 +5,47 @@ require_relative '../lib/hexlet_code'
 class FormTest < Minitest::Test
   def setup
     @user = HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm'
+    @setup ||= Dir['spec/fixtures/*'].map { |f| [File.basename(f, '.html'), File.read(f)] }.to_h
   end
 
   def test_empty
-    assert HexletCode.form_for(@user) { |_| } == '<form action="#" method="post"></form>'
+    assert_equals_fixture HexletCode.form_for(@user) { |_| }
   end
 
   def test_users_url
-    assert HexletCode.form_for(@user, url: '/users') { |_|
-    } == '<form action="/users" method="post"></form>'
+    assert_equals_fixture HexletCode.form_for(@user, url: '/users') { |_| }
   end
 
   def test_with_inputs
-    result = HexletCode.form_for(@user, url: '/users', method: 'patch') do |f|
+    assert_equals_fixture(HexletCode.form_for(@user, url: '/users', method: 'patch') do |f|
       # Проверяет есть ли значение внутри name
       f.input :name
       # Проверяет есть ли значение внутри job
       f.input :job, as: :text
       f.submit 'Wow'
-    end
-    assert result == '<form action="/users" method="patch"><label for="name">Name</label>' \
-                     '<input name="name" type="text" value="rob"><label for="job">Job</label><textarea name="job" ' \
-                     'cols="20" rows="40">hexlet</textarea><input type="submit" value="Wow"></form>'
+    end)
   end
 
   # добавил в фикстуру value="hexlet" для атрибута job (тк значение у нас есть!)
   def test_with_inputs_with_attrs
-    result = HexletCode.form_for @user, url: '#' do |f|
+    assert_equals_fixture(HexletCode.form_for(@user, url: '#') do |f|
       f.input :name, class: 'user-input'
       f.input :job
       f.submit
-    end
-    assert result == '<form action="#" method="post"><label for="name">Name</label>' \
-                     '<input name="name" type="text" value="rob" class="user-input">' \
-                     '<label for="job">Job</label><input name="job" type="text" value="hexlet">' \
-                     '<input type="submit" value="Save"></form>'
+    end)
   end
 
   def test_with_inputs_with_default_values
-    result = HexletCode.form_for @user do |f|
+    assert_equals_fixture(HexletCode.form_for(@user) do |f|
       f.input :job, as: :text
-    end
-    assert result == '<form action="#" method="post"><label for="job">Job</label><textarea name="job" cols="20" rows="40">hexlet</textarea></form>'
+    end)
   end
 
   # изменил порядок атрибутов на тот, который прописан в дефолтах, тк в ruby порядок гарантируется хешем
   def test_with_inputs_with_custom_values
-    result = HexletCode.form_for @user, url: '#' do |f|
+    assert_equals_fixture(HexletCode.form_for(@user, url: '#') do |f|
       f.input :job, as: :text, rows: 50, cols: 50
-    end
-    assert result == '<form action="#" method="post"><label for="job">Job</label><textarea name="job" cols="50" rows="50">hexlet</textarea></form>'
+    end)
   end
 
   def test_error_for_undefined_field
@@ -66,5 +57,9 @@ class FormTest < Minitest::Test
         f.input :age
       end
     end
+  end
+
+  def assert_equals_fixture(html)
+    assert html == @setup[name]
   end
 end
