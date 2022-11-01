@@ -11,7 +11,6 @@ module HexletCode
   autoload(:Tag, './lib/tag.rb')
   autoload(:Renderer, './lib/renderer.rb')
   autoload(:Form, './lib/form.rb')
-  autoload(:Input, './lib/input.rb')
   autoload(:LabelNode, './lib/label_node.rb')
   autoload(:TextareaNode, './lib/textarea_node.rb')
   autoload(:InputNode, './lib/input_node.rb')
