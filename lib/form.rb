@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'minitest/autorun'
+
 module HexletCode
   class Form
     attr_accessor :obj, :fields
