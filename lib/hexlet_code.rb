@@ -9,14 +9,13 @@ module HexletCode
 
   autoload(:Tag, './lib/tag.rb')
   autoload(:Renderer, './lib/renderer.rb')
-  autoload(:Form, './lib/form.rb')
+  autoload(:Form, File.join(File.dirname(__FILE__), '/form.rb'))
   autoload(:LabelNode, './lib/label_node.rb')
   autoload(:TextareaNode, './lib/textarea_node.rb')
   autoload(:InputNode, './lib/input_node.rb')
   autoload(:SubmitNode, './lib/submit_node.rb')
 
   def self.form_for(user, params = {}, &block)
-    autoload(:Form, './lib/form.rb')
     form = Form.new(user)
     form.execute(&block)
     Renderer.new(user, form.fields).render(params)
