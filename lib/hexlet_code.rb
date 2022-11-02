@@ -7,13 +7,13 @@ module HexletCode
 
   User = Struct.new(:name, :job, :gender, keyword_init: true)
 
-  autoload(:Tag, './lib/tag.rb')
-  autoload(:Renderer, './lib/renderer.rb')
+  autoload(:Tag, File.join(File.dirname(__FILE__), '/tag.rb'))
+  autoload(:Renderer, File.join(File.dirname(__FILE__), '/renderer.rb'))
   autoload(:Form, File.join(File.dirname(__FILE__), '/form.rb'))
-  autoload(:LabelNode, './lib/label_node.rb')
-  autoload(:TextareaNode, './lib/textarea_node.rb')
-  autoload(:InputNode, './lib/input_node.rb')
-  autoload(:SubmitNode, './lib/submit_node.rb')
+  autoload(:LabelNode, File.join(File.dirname(__FILE__), '/label_node.rb'))
+  autoload(:TextareaNode, File.join(File.dirname(__FILE__), '/textarea_node.rb'))
+  autoload(:InputNode, File.join(File.dirname(__FILE__), '/input_node.rb'))
+  autoload(:SubmitNode, File.join(File.dirname(__FILE__), '/submit_node.rb'))
 
   def self.form_for(user, params = {}, &block)
     form = Form.new(user)
