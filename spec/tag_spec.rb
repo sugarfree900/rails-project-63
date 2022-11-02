@@ -2,28 +2,39 @@
 
 require_relative '../lib/tag'
 
-class TagTest < Minitest::Test
-  def test_br
-    assert HexletCode::Tag.build('br') == '<br>'
-  end
+require_relative './support/spec_helpers'
 
-  def test_img
-    assert HexletCode::Tag.build('img', src: 'path/to/image') == '<img src="path/to/image">'
-  end
+RSpec.configure do |c|
+  c.include SpecHelpers
+end
 
-  def test_input
-    assert HexletCode::Tag.build('input', type: 'submit', value: 'Save') == '<input type="submit" value="Save">'
-  end
+describe HexletCode::Tag do
+  describe 'tag' do
+    context 'is' do
+      it 'br' do
+        expect(HexletCode::Tag.build('br')).to eq('<br>')
+      end
 
-  def test_label
-    assert HexletCode::Tag.build('label') { 'Email' } == '<label>Email</label>'
-  end
+      it 'img' do
+        expect(HexletCode::Tag.build('img', src: 'path/to/image')).to eq('<img src="path/to/image">')
+      end
 
-  def test_label_attrs
-    assert HexletCode::Tag.build('label', for: 'email') { 'Email' } == '<label for="email">Email</label>'
-  end
+      it 'input' do
+        expect(HexletCode::Tag.build('input', type: 'submit',
+                                              value: 'Save')).to eq('<input type="submit" value="Save">')
+      end
 
-  def test_div
-    assert HexletCode::Tag.build('div') {} == '<div></div>'
+      it 'label' do
+        expect(HexletCode::Tag.build('label') { 'Email' }).to eq('<label>Email</label>')
+      end
+
+      it 'label with attrs' do
+        expect(HexletCode::Tag.build('label', for: 'email') { 'Email' }).to eq('<label for="email">Email</label>')
+      end
+
+      it 'div' do
+        expect(HexletCode::Tag.build('div') {}).to eq('<div></div>')
+      end
+    end
   end
 end

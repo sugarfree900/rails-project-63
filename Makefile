@@ -3,4 +3,4 @@ install:
 lint:
 	rubocop
 test:
-	rake
+	rspec spec
