@@ -13,12 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'hexlet_code.gemspec'
 
-# Offense count: 3
-# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods.
-# AllowedMethods: refine
-Metrics/BlockLength:
-  Max: 44
-
 # Offense count: 8
 # Configuration parameters: AllowedConstants.
 Style/Documentation:

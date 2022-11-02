@@ -33,7 +33,7 @@ describe HexletCode::Tag do
       end
 
       it 'div' do
-        expect(HexletCode::Tag.build('div') {}).to eq('<div></div>')
+        expect(HexletCode::Tag.build('div') { '' }).to eq('<div></div>')
       end
     end
   end

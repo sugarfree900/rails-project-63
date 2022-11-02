@@ -14,11 +14,11 @@ describe HexletCode::Renderer do
       let(:user) { HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm' }
 
       it 'test_empty' do |example|
-        expect(HexletCode.form_for(user) { |_| }).to eq(get_fixture(example.description))
+        expect(HexletCode.form_for(user) { '' }).to eq(get_fixture(example.description))
       end
 
       it 'test_users_url' do |example|
-        expect(HexletCode.form_for(user, url: '/users') { |_| }).to eq(get_fixture(example.description))
+        expect(HexletCode.form_for(user, url: '/users') { '' }).to eq(get_fixture(example.description))
       end
 
       it 'test_with_inputs' do |example|
@@ -38,6 +38,14 @@ describe HexletCode::Renderer do
           f.submit
         end).to eq(get_fixture(example.description))
       end
+    end
+  end
+end
+
+describe HexletCode::Renderer do
+  describe 'form with textarea' do
+    context 'is' do
+      let(:user) { HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm' }
 
       it 'test_with_inputs_with_default_values' do |example|
         expect(HexletCode.form_for(user) do |f|
@@ -50,6 +58,14 @@ describe HexletCode::Renderer do
           f.input :job, as: :text, rows: 50, cols: 50
         end).to eq(get_fixture(example.description))
       end
+    end
+  end
+end
+
+describe HexletCode::Renderer do
+  describe 'form with error' do
+    context 'is' do
+      let(:user) { HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm' }
 
       it 'test_error_for_undefined_field' do
         expect do
