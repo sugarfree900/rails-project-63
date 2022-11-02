@@ -16,6 +16,7 @@ module HexletCode
   autoload(:SubmitNode, './lib/submit_node.rb')
 
   def self.form_for(user, params = {}, &block)
+    autoload(:Form, './lib/form.rb')
     form = Form.new(user)
     form.execute(&block)
     Renderer.new(user, form.fields).render(params)
