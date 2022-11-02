@@ -21,9 +21,5 @@ module HexletCode
     def submit(value = 'Save')
       @fields.append(SubmitNode.new(value))
     end
-
-    def execute
-      yield self
-    end
   end
 end

@@ -15,9 +15,9 @@ module HexletCode
   autoload(:InputNode, File.join(File.dirname(__FILE__), '/input_node.rb'))
   autoload(:SubmitNode, File.join(File.dirname(__FILE__), '/submit_node.rb'))
 
-  def self.form_for(user, params = {}, &block)
+  def self.form_for(user, params = {})
     form = Form.new(user)
-    form.execute(&block)
+    yield form
     Renderer.new(user, form.fields).render(params)
   end
 end
