@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/inflector'
-
 module HexletCode
   class Form
     attr_accessor :obj, :fields
@@ -13,7 +11,8 @@ module HexletCode
 
     def input(attr, params = {})
       @fields.append(Nodes::Label.new(attr))
-      @fields.append("HexletCode::Nodes::#{(params[:as] || 'input').capitalize}".constantize.new(attr, obj, params))
+      @fields.append(Object.const_get("HexletCode::Nodes::#{(params[:as] || 'input').capitalize}").new(attr, obj,
+                                                                                                       params))
     end
 
     def submit(value = 'Save')
