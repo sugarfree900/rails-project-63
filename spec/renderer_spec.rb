@@ -8,10 +8,12 @@ RSpec.configure do |c|
   c.include SpecHelpers
 end
 
-describe HexletCode::Renderer do
+User = Struct.new(:name, :job, :gender, keyword_init: true)
+
+describe HexletCode do
   describe 'form' do
     context 'is' do
-      let(:user) { HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm' }
+      let(:user) { User.new name: 'rob', job: 'hexlet', gender: 'm' }
 
       it 'test_empty' do |example|
         expect(HexletCode.form_for(user) { '' }).to eq(get_fixture(example.description))
@@ -42,10 +44,10 @@ describe HexletCode::Renderer do
   end
 end
 
-describe HexletCode::Renderer do
+describe HexletCode do
   describe 'form with textarea' do
     context 'is' do
-      let(:user) { HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm' }
+      let(:user) { User.new name: 'rob', job: 'hexlet', gender: 'm' }
 
       it 'test_with_inputs_with_default_values' do |example|
         expect(HexletCode.form_for(user) do |f|
@@ -60,12 +62,24 @@ describe HexletCode::Renderer do
       end
     end
   end
+
+  describe 'form with nil action' do
+    context 'is' do
+      let(:user) { User.new name: 'rob', job: 'hexlet', gender: 'm' }
+
+      it 'test_with_nil_method' do |example|
+        expect(HexletCode.form_for(user, method: nil) do |f|
+          f.input :job, as: :text
+        end).to eq(get_fixture(example.description))
+      end
+    end
+  end
 end
 
-describe HexletCode::Renderer do
+describe HexletCode do
   describe 'form with error' do
     context 'is' do
-      let(:user) { HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm' }
+      let(:user) { User.new name: 'rob', job: 'hexlet', gender: 'm' }
 
       it 'test_error_for_undefined_field' do
         expect do

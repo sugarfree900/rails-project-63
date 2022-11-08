@@ -18,7 +18,7 @@ module HexletCode
       end
 
       def build_opening_tag(tag, params)
-        if params.keys.length.positive?
+        if params.keys.any?
           "<#{tag} #{build_params(params)}>"
         else
           "<#{tag}>"
