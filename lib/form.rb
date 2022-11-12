@@ -11,12 +11,21 @@ module HexletCode
 
     def input(attr, params = {})
       @fields.append(Nodes::Label.new(attr))
-      @fields.append(Object.const_get("HexletCode::Nodes::#{(params[:as] || 'input').capitalize}").new(attr, obj,
-                                                                                                       params))
+      @fields.append(node_module(params[:as]).new(attr, obj, params))
     end
 
     def submit(value = 'Save')
       @fields.append(Nodes::Submit.new(value))
+    end
+
+    private
+
+    def node_string(as)
+      "HexletCode::Nodes::#{(as || 'input').capitalize}"
+    end
+
+    def node_module(as)
+      Object.const_get(node_string(as))
     end
   end
 end

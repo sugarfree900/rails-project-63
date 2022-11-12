@@ -10,7 +10,7 @@ module HexletCode
     end
 
     def render(params)
-      Tag.build('form', { action: params.delete(:url) || '#', method: 'post' }.merge(params)) do
+      Tag.build('form', build_params(params)) do
         tags.map do |f|
           if f.content.nil?
             Tag.build(f.tag, f.attrs)
@@ -19,6 +19,12 @@ module HexletCode
           end
         end.join
       end
+    end
+
+    private
+
+    def build_params(params)
+      { action: params[:url] || '#', method: 'post' }.merge(params.except(:url))
     end
   end
 end
